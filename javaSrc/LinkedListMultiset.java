@@ -10,9 +10,9 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		private Node<T> nextNode;
 		
 		public Node(T item, int count, Node<T> nextNode) {
-			item = this.item;
-			count = this.count;
-			nextNode = this.nextNode;
+			this.item = item;
+			this.count = count;
+			this.nextNode = nextNode;
 		}
 		
 		public Node() {}
@@ -47,8 +47,16 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	
 	public int search(T item) {
 		// Implement me!		
-		
-		
+		int count = 0;
+		Node<T> target = mHead;
+		if (target != null) {
+			if(item == target.item) {
+				count++;
+				target = target.nextNode;
+			}
+			return count;
+		}
+		else
 		// default return, please override when you implement this method
 		return 0;
 	} // end of add()
