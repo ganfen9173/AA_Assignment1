@@ -49,16 +49,14 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		// Implement me!		
 		int count = 0;
 		Node<T> target = mHead;
-		if (target != null) {
+		while (target != null) {
 			if(item == target.item) {
 				count++;
 				target = target.nextNode;
 			}
-			return count;
 		}
-		else
 		// default return, please override when you implement this method
-		return 0;
+		return count;
 	} // end of add()
 	
 	
