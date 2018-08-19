@@ -7,7 +7,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	private class Node<T> {
 		private T item;
 		private int count;
-		private Node<T> nextNode;
+		protected Node<T> nextNode;
 		
 		public Node(T item, int count, Node<T> nextNode) {
 			this.item = item;
@@ -16,6 +16,31 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		}
 		
 		public Node() {}
+
+		public T getItem() {
+			return item;
+		}
+
+		public void setItem(T item) {
+			this.item = item;
+		}
+
+		public int getCount() {
+			return count;
+		}
+
+		public void setCount(int count) {
+			this.count = count;
+		}
+
+		public Node<T> getNextNode() {
+			return nextNode;
+		}
+
+		public void setNextNode(Node<T> nextNode) {
+			this.nextNode = nextNode;
+		}			
+		
 	}
 	
 	private Node<T> mHead;
@@ -28,11 +53,15 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	
 	
 	public void add(T item) {
-		Node newItem = new Node<T>(item, 1, null);
+		Node<T> newItem = new Node<T>(item, 1, null);
 		
-		Node<T> node = mHead;
-		while (node.nextNode != null) {
-			node = node.nextNode; //find the last node
+		Node<T> node = new Node<T>();
+		node = mHead;
+		
+		if (mHead != null) {
+			while (node.nextNode != null) {
+				node = node.nextNode; //find the last node
+			}
 		}
 		
 		if (mHead == null) {
@@ -52,8 +81,8 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		while (target != null) {
 			if(item == target.item) {
 				count++;
-				target = target.nextNode;
 			}
+			target = target.nextNode;
 		}
 		// default return, please override when you implement this method
 		return count;
