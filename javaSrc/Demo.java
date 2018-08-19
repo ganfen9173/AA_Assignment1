@@ -12,7 +12,7 @@ public class Demo {
 		list.add("a");
 		
 		
-		System.out.println(list.search("j"));
+		System.out.println(list.search("a"));
 
 	}
 

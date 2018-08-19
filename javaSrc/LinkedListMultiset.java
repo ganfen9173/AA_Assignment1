@@ -7,7 +7,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	private class Node<T> {
 		private T item;
 		private int count;
-		protected Node<T> nextNode;
+		private Node<T> nextNode;
 		
 		public Node(T item, int count, Node<T> nextNode) {
 			this.item = item;
