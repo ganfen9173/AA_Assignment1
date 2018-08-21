@@ -70,7 +70,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		Node<T> current = mHead;
 		Node<T> previous = null;
 		
-		while (current != null) {
+		while (current.nextNode !=null) {
 			if(current == item) {
 				if(current == mHead) {
 					mHead = current.nextNode;
@@ -85,6 +85,10 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	
 	public void removeAll(T item) {
 		// Implement me!
+		Node<T> current = mHead;
+		while (current !=null) {
+			removeOne(item);
+		}
 	} // end of removeAll()
 	
 	
