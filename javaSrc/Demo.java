@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 
 public class Demo {
 
@@ -11,7 +12,7 @@ public class Demo {
 		list.add("b");
 		list.add("a");
 		
-		
+		System.out.println(list);
 		System.out.println(list.search("a"));
 
 	}

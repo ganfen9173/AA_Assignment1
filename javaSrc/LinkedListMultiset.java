@@ -102,7 +102,8 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	public void print(PrintStream out) {
 		Node<T> node = mHead;
 		while (node != null) {
-			node.count = this.search(node.item);
+			node.setCount(this.search(node.item));
+			//node.count = this.search(node.item);
 			out.println(node.item + printDelim + node.count);
 			node = node.nextNode;
 		}
