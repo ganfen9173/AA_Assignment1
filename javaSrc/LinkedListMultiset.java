@@ -15,31 +15,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 			this.nextNode = nextNode;
 		}
 		
-		public Node() {}
-
-		public T getItem() {
-			return item;
-		}
-
-		public void setItem(T item) {
-			this.item = item;
-		}
-
-		public int getCount() {
-			return count;
-		}
-
-		public void setCount(int count) {
-			this.count = count;
-		}
-
-		public Node<T> getNextNode() {
-			return nextNode;
-		}
-
-		public void setNextNode(Node<T> nextNode) {
-			this.nextNode = nextNode;
-		}			
+		public Node() {}			
 		
 	}
 	
@@ -90,20 +66,40 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	
 	
 	public void removeOne(T item) {
+
 		// Implement me!	
+
+		// Implement me!
+		Node<T> current = mHead;
+		Node<T> previous = null;
+		
+		while (current.nextNode !=null) {
+			if(current == item) {
+				if(current == mHead) {
+					mHead = current.nextNode;
+				}else
+					previous.nextNode = current.nextNode;
+			}
+			previous = current;
+			current = current.nextNode;
+		}
+//github.com/ganfen9173/AA_Assignment1.git
 	} // end of removeOne()
 	
 	
 	public void removeAll(T item) {
 		// Implement me!
+		Node<T> current = mHead;
+		while (current !=null) {
+			removeOne(item);
+		}
 	} // end of removeAll()
 	
 	
 	public void print(PrintStream out) {
 		Node<T> node = mHead;
 		while (node != null) {
-			node.setCount(this.search(node.item));
-			//node.count = this.search(node.item);
+			node.count = this.search(node.item);
 			out.println(node.item + printDelim + node.count);
 			node = node.nextNode;
 		}
