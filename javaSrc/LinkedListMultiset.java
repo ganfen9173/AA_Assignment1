@@ -97,11 +97,22 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	
 	
 	public void print(PrintStream out) {
+		Set set = new HashSet();
+		
 		Node<T> node = mHead;
+		node.count = this.search(node.item);
+		out.println(node.item + printDelim + node.count);
+		set.add(node.item);
+		node = node.nextNode;
 		while (node != null) {
-			node.count = this.search(node.item);
-			out.println(node.item + printDelim + node.count);
-			node = node.nextNode;
+			for (int i = 0; i < set.size(); i ++) {
+				if (!set.contains(node.item)) {
+					node.count = this.search(node.item);
+					out.println(node.item + printDelim + node.count);
+					set.add(node.item);
+					node = node.nextNode;
+				}
+			}
 		}
 		// Implement me!
 	} // end of print()
