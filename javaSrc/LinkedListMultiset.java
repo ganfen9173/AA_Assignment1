@@ -44,7 +44,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 			mHead = newItem;
 		}
 		else {
-			node.nextNode = new Node<T>(item, this.search(item), null);
+			node.nextNode = new Node<T>(item, 1, null);
 		}
 		// Implement me!
 	} // end of add()

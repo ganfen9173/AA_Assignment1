@@ -4,16 +4,25 @@ public class Demo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LinkedListMultiset<String> list= new LinkedListMultiset<>();
+	
+		HashMultiset<String> list= new HashMultiset<>();
+		MultisetTester tester = new MultisetTester();
 		
-		list.add("a");
-		list.add("b");
-		list.add("c");
-		list.add("b");
-		list.add("a");
+		list.add("robot");
+		list.add("fortune");
+		list.add("macbook");
+		list.add("robot");
+		list.search("robot");
+		list.add("macbook");
+		list.add("macbook");
+		list.add("fortune");
+		list.removeOne("fortune");
 		
-		System.out.println(list);
-		System.out.println(list.search("a"));
+		
+		//System.out.println(list);
+		//System.out.println(list.);
+		
+		list.print(tester.outStream);
 
 	}
 
