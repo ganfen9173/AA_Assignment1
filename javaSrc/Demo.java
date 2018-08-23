@@ -5,7 +5,7 @@ public class Demo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	
-		HashMultiset<String> list= new HashMultiset<>();
+		LinkedListMultiset<String> list= new LinkedListMultiset<>();
 		MultisetTester tester = new MultisetTester();
 		
 		list.add("robot");
@@ -19,7 +19,7 @@ public class Demo {
 		list.removeOne("fortune");
 		
 		
-		//System.out.println(list);
+		//System.out.println(list.search("fortune"));
 		//System.out.println(list.);
 		
 		list.print(tester.outStream);

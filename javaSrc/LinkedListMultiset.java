@@ -34,17 +34,14 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		Node<T> node = new Node<T>();
 		node = mHead;
 		
-		if (mHead != null) {
-			while (node.nextNode != null) {
-				node = node.nextNode; //find the last node
-			}
-		}
-		
 		if (mHead == null) {
 			mHead = newItem;
 		}
 		else {
-			node.nextNode = new Node<T>(item, 1, null);
+			while (node.nextNode != null) {
+				node = node.nextNode; //find the last node
+			}
+			node.nextNode = new Node<T>(item, search(item)+1, null);
 		}
 		// Implement me!
 	} // end of add()
@@ -52,23 +49,20 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	
 	public int search(T item) {
 		// Implement me!		
-		int count = 0;
-		Node<T> target = mHead;
-		while (target != null) {
-			if(item == target.item) {
-				count++;
+		Node<T> current = mHead;
+		Node<T> target = new Node<T>();
+		while (current.nextNode != null) {
+			if(item == current.item) {
+				target = current;
 			}
-			target = target.nextNode;
+			current = current.nextNode;
 		}
 		// default return, please override when you implement this method
-		return count;
+		return target.count;
 	} // end of add()
 	
 	
 	public void removeOne(T item) {
-
-		// Implement me!	
-
 		// Implement me!
 		Node<T> current = mHead;
 		Node<T> previous = null;
@@ -79,6 +73,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 					mHead = current.nextNode;
 				}else
 					previous.nextNode = current.nextNode;
+				break;
 			}
 			previous = current;
 			current = current.nextNode;
@@ -110,8 +105,8 @@ public class LinkedListMultiset<T> extends Multiset<T>
 					node.count = this.search(node.item);
 					out.println(node.item + printDelim + node.count);
 					set.add(node.item);
-					node = node.nextNode;
 				}
+				node = node.nextNode;
 			}
 		}
 		// Implement me!
