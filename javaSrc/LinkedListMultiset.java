@@ -68,9 +68,11 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		Node<T> current = mHead;
 		Node<T> previous = null;
 		Node<T> removeNode = null;
-		for(int i=length;i>1;i--){
+		Node<T> pointToRemoveNode  = null;
+		for(int i=length;i>0;i--){
 			if(current.item == item) {
 				removeNode = current;
+				pointToRemoveNode = previous;
 			}
 			previous = current;
 			current = current.nextNode;
@@ -78,10 +80,10 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		if(removeNode != null) {
 			if(removeNode == mHead) 
 			{	
-				mHead = current.nextNode;
+				mHead = removeNode.nextNode;
 				System.out.println("");
 			}else {
-				previous.nextNode= current.nextNode;
+				pointToRemoveNode.nextNode= removeNode.nextNode;
 			}
 			length--;
 		}
