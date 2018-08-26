@@ -20,20 +20,20 @@ public class LinkedListMultiset<T> extends Multiset<T>
 	}
 	
 	private Node<T> mHead;
+	private int length;
 	
 	
 	public LinkedListMultiset() {
 		// Implement me!
 		mHead = null;
+		length = 0;
 	} // end of LinkedListMultiset()
 	
 	
 	public void add(T item) {
-		Node<T> newItem = new Node<T>(item, 1, null);
-		
+		Node<T> newItem = new Node<T>(item, 1, null);		
 		Node<T> node = new Node<T>();
-		node = mHead;
-		
+		node = mHead;	
 		if (mHead == null) {
 			mHead = newItem;
 		}
@@ -41,24 +41,25 @@ public class LinkedListMultiset<T> extends Multiset<T>
 			while (node.nextNode != null) {
 				node = node.nextNode; //find the last node
 			}
-			node.nextNode = new Node<T>(item, search(item)+1, null);
+			node.nextNode = new Node<T>(item, this.search(item)+1, null);
 		}
+		length++;
 		// Implement me!
 	} // end of add()
 	
 	
 	public int search(T item) {
 		// Implement me!		
+		int count = 0;
 		Node<T> current = mHead;
-		Node<T> target = new Node<T>();
-		while (current.nextNode != null) {
+		while (current != null) {
 			if(item == current.item) {
-				target = current;
+				count++;
 			}
 			current = current.nextNode;
 		}
 		// default return, please override when you implement this method
-		return target.count;
+		return count;
 	} // end of add()
 	
 	
@@ -66,17 +67,26 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		// Implement me!
 		Node<T> current = mHead;
 		Node<T> previous = null;
-		
-		while (current.nextNode !=null) {
-			if(current == item) {
-				if(current == mHead) {
-					mHead = current.nextNode;
-				}else
-					previous.nextNode = current.nextNode;
-				break;
+		Node<T> removeNode = null;
+		for(int i=length;i>1;i--){
+			if(current.item == item) {
+				removeNode = current;
 			}
 			previous = current;
 			current = current.nextNode;
+		}
+		if(removeNode != null) {
+			if(removeNode == mHead) 
+			{	
+				mHead = current.nextNode;
+				System.out.println("");
+			}else {
+				previous.nextNode= current.nextNode;
+			}
+			length--;
+		}
+		if(removeNode == null) {
+			System.out.println("Item not exist.");
 		}
 //github.com/ganfen9173/AA_Assignment1.git
 	} // end of removeOne()
@@ -87,19 +97,54 @@ public class LinkedListMultiset<T> extends Multiset<T>
 		Node<T> current = mHead;
 		while (current !=null) {
 			removeOne(item);
+			current = current.nextNode;
 		}
 	} // end of removeAll()
 	
 	
 	public void print(PrintStream out) {
-		Set set = new HashSet();
-		
+		String[] itemSet = new String[length];
+		int numberOfPrint = 0;
+		int numberOfItem = 0;
+		Node<T> current = mHead;
+		while(current != null) {
+			if (itemSet[0] == null) {
+				out.println(current.item + printDelim + search(current.item));
+				itemSet[0] = current.item.toString();
+				//System.out.println(itemSet.length);
+				numberOfPrint += search(current.item);
+				//System.out.println(numberOfPrint);
+				numberOfItem++;
+				//System.out.println(numberOfItem);
+			}else {
+				for(String item: itemSet){
+					if(item == null) {
+						out.println(current.item + printDelim + search(current.item));
+						itemSet[numberOfItem] = current.item.toString();
+						numberOfPrint += search(current.item);
+						numberOfItem ++;
+						break;
+					}
+					else if(item.toString() == current.item.toString()) {
+						break;
+					}
+				}
+				current = current.nextNode;
+			}
+			
+			//System.out.println(current.item.toString()+current.count);
+			//System.out.println(current.item.toString());
+			if(length <= numberOfPrint) {
+				System.out.print("exit while loop");
+				break;
+			}
+		}
+	  /*Set<T> set = new HashSet<T>();	
 		Node<T> node = mHead;
 		node.count = this.search(node.item);
 		out.println(node.item + printDelim + node.count);
 		set.add(node.item);
-		node = node.nextNode;
-		while (node != null) {
+		while (node.nextNode != null) {
 			for (int i = 0; i < set.size(); i ++) {
 				if (!set.contains(node.item)) {
 					node.count = this.search(node.item);
@@ -108,7 +153,7 @@ public class LinkedListMultiset<T> extends Multiset<T>
 				}
 				node = node.nextNode;
 			}
-		}
+		}*/
 		// Implement me!
 	} // end of print()
 	
