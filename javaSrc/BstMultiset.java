@@ -3,7 +3,26 @@ import java.util.*;
 
 public class BstMultiset<T> extends Multiset<T>
 {
+	public class Node <T> {
+		private T item;
+		private int count;
+		private Node<T> leftNode;
+		private Node<T> rightNode;
+		
+		public Node(T item, int count, Node<T> leftNode, Node<T> rightNode){
+			this.item = item;
+			this.count = count;
+			this.leftNode = rightNode;
+			this.rightNode = rightNode;
+		}
+		
+		public Node() {}
+	}
+	
+	private Node<T> root;
+	
 	public BstMultiset() {
+		root = null;
 		// Implement me!
 	} // end of BstMultiset()
 
