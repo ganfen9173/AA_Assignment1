@@ -1,5 +1,5 @@
 import java.io.PrintStream;
-import java.util.*;
+
 
 public class BstMultiset<T> extends Multiset<T>
 {
@@ -84,7 +84,82 @@ public class BstMultiset<T> extends Multiset<T>
 	
 	
 	public void removeAll(T item) {
-		// Implement me!
+		Node<T> currentNode = root;
+		Node<T> parentNode = null;
+		Node<T> target = null;
+		while (currentNode != null) {
+			if (item.toString().compareTo(currentNode.item.toString()) < 0) {
+				parentNode = currentNode;
+				currentNode = currentNode.leftNode;
+			} else if (item.toString().compareTo(currentNode.item.toString()) > 0){
+				parentNode = currentNode;
+				currentNode = currentNode.rightNode;
+			} else {
+				target = currentNode;
+				break;
+			}
+		}
+		
+		if (target != null) {
+			if (target.leftNode == null && target.rightNode == null) {
+				if (target.item.toString().compareTo(parentNode.item.toString()) < 0) {
+					parentNode.leftNode = null;
+				} else {
+					parentNode.rightNode = null;
+				}
+			}
+			
+			else if (target.leftNode == null && target.rightNode !=null) {
+				if (target.item.toString().equals(root.item.toString())) {
+					root = target.rightNode;	
+				} else {
+					if (target.item.toString().compareTo(parentNode.item.toString()) > 0) {
+						parentNode.rightNode = target.rightNode;
+					} else {
+						parentNode.leftNode = target.rightNode;
+					}
+				}
+			}
+			
+			else if (target.rightNode == null && target.leftNode !=null) {
+				if (target.item.toString().equals(root.item.toString())) {
+					root = target.leftNode;
+				} else {
+					if (target.item.toString().compareTo(parentNode.item.toString()) > 0) {
+						parentNode.rightNode = target.leftNode;
+					} else {
+						parentNode.leftNode = target.leftNode;
+					}
+				}
+			}
+			
+			else {
+				Node <T> smallestNode = target.rightNode;
+				Node <T> nextNode = null;
+				Node <T> recordNode = null;
+				while (smallestNode.leftNode != null) {
+					nextNode = smallestNode;
+					smallestNode = smallestNode.leftNode;
+					recordNode = smallestNode;
+				}
+				if (target.item.toString().compareTo(parentNode.item.toString()) > 0) {
+					parentNode.rightNode = smallestNode;
+				} else {
+					parentNode.leftNode = smallestNode;	
+				}
+				
+				smallestNode.leftNode = target.leftNode;
+				smallestNode.rightNode = target.rightNode;
+				
+				if (smallestNode.rightNode == smallestNode) {
+					smallestNode.rightNode = recordNode.rightNode;
+				} else {
+					nextNode.leftNode = null;
+				}
+				
+			}
+		}
+		
 	} // end of removeAll()
 
 
