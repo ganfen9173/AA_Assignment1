@@ -54,14 +54,10 @@ public class BstMultiset<T> extends Multiset<T>
 		if (!flag) {
 			if (item.toString().compareTo(parentNode.item.toString()) < 0) {
 				parentNode.leftNode = new Node<T> (item, 1, null, null);
-			} else  if (item.toString().compareTo(parentNode.item.toString()) > 0){
-				parentNode.rightNode = new Node<T> (item, 1, null, null);
 			} else {
-				parentNode.count ++;
-			}
+				parentNode.rightNode = new Node<T> (item, 1, null, null);
+			} 
 		}
-		// Implement me!
-		// Implement me!
 	} // end of add()
 
 
