@@ -13,13 +13,15 @@ public class Demo {
 		list.add("macbook");
 		list.add("robot");
 		list.search("robot");
+		list.search("book");
 		list.add("macbook");
 		list.add("macbook");
 		list.add("fortune");
-		list.removeOne("fortune");
+		//list.removeOne("fortune");
 		
 		
-		//System.out.println(list.search("fortune"));
+		System.out.println(list.search("fortune"));
+		System.out.println(list.search("book"));
 		//System.out.println(list.);
 		
 		list.print(tester.outStream);
