@@ -27,6 +27,40 @@ public class BstMultiset<T> extends Multiset<T>
 	} // end of BstMultiset()
 
 	public void add(T item) {
+		Node<T> currentNode = root;
+		Node<T> parentNode = null;
+		boolean flag = false;
+		
+		
+		if (root == null) {
+			root = new Node<T> (item, 1, null, null);
+			flag = true;
+		} else {
+			while (currentNode != null) {
+				if (item.toString().compareTo(currentNode.item.toString()) < 0) {
+					parentNode = currentNode;
+					currentNode = currentNode.leftNode;
+				} else  if (item.toString().compareTo(currentNode.item.toString()) > 0){
+					parentNode = currentNode;
+					currentNode = currentNode.rightNode;
+				} else {
+					currentNode.count ++;
+					flag = true;
+					break;
+				}
+			}
+		}
+		
+		if (!flag) {
+			if (item.toString().compareTo(parentNode.item.toString()) < 0) {
+				parentNode.leftNode = new Node<T> (item, 1, null, null);
+			} else  if (item.toString().compareTo(parentNode.item.toString()) > 0){
+				parentNode.rightNode = new Node<T> (item, 1, null, null);
+			} else {
+				parentNode.count ++;
+			}
+		}
+		// Implement me!
 		// Implement me!
 	} // end of add()
 
