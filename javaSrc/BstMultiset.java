@@ -14,7 +14,16 @@ public class BstMultiset<T> extends Multiset<T>
 
 	public int search(T item) {
 		// Implement me!
-
+		Node<T> currentNode = root;
+		while (currentNode != null) {
+			if (item.toString().compareTo(currentNode.item.toString()) < 0) {
+				currentNode = currentNode.leftNode;
+			} else if (item.toString().compareTo(currentNode.item.toString()) > 0){
+				currentNode = currentNode.rightNode;
+			} else {
+				return currentNode.count;
+			}
+		}
 		// default return, please override when you implement this method
 		return 0;
 	} // end of add()
