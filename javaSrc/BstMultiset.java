@@ -116,16 +116,17 @@ public class BstMultiset<T> extends Multiset<T>
 			current.parentNode.leftNode=current.leftNode;
 		}
 		else if(current.rightNode != null && current.leftNode !=null){
-			if(current == root) {
-				
+			Node minNode = root.findMin(current.rightNode);
+			current.item = minNode.item;
+			current.count = minNode.count;
+			if(minNode == minNode.parentNode.leftNode) {
+				minNode.parentNode.leftNode = null;
 			}
-			else {
-				Node minNode = root.findMin(current.rightNode);
-				current.item = minNode.item;
-				current.count = minNode.count;
-				minNode.parentNode.leftNode =null;
+			if(minNode == minNode.parentNode.rightNode) {
+				minNode.parentNode.rightNode = null;
 			}
 		}
+
 	} // end of removeAll()
 
 
