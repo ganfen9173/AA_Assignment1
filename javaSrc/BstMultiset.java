@@ -89,12 +89,13 @@ public class BstMultiset<T> extends Multiset<T>
 				currentNode = currentNode.rightNode;
 			} else {
 				targetNode = currentNode;
+				break;
 			}
 		}
 		if (targetNode != null && targetNode.count > 1) {
 			targetNode.count --;
 		} 
-		if (targetNode != null && targetNode.count <= 1) {
+		else if (targetNode != null && targetNode.count <= 1) {
 			this.removeAll(item);
 		} 
 		
@@ -112,104 +113,28 @@ public class BstMultiset<T> extends Multiset<T>
 			node.rightNode = deleteNode(node.rightNode, item);
 		} else {
 			if (node.leftNode == null) {
-				return root.rightNode;
+				return node.rightNode;
 			} else if (node.rightNode == null){
 				return node.leftNode;
 			}
 			
 			node.item = minValue (node.rightNode).item;
 			node.count = minValue (node.rightNode).count;
-			node.rightNode = deleteNode(node.rightNode, item);
+			node.rightNode = deleteNode(node.rightNode, node.item);
 		}
 			
 		return node;
 	}
 	
 	public Node<T> minValue(Node<T> node) {
-		Node<T> min = new Node<T>();
-		while (node.leftNode != null) {
-			min = node.leftNode;
+		Node<T> min = node;
+		while (min.leftNode != null) {
+			min = min.leftNode;
 		}
 		return min;
 	}
 	public void removeAll(T item) {
-		root = deleteNode(root, item);
-		
-//		Node<T> currentNode = root;
-//		Node<T> parentNode = null;
-//		Node<T> target = null;
-//		while (currentNode != null) {
-//			if (item.toString().compareTo(currentNode.item.toString()) < 0) {
-//				parentNode = currentNode;
-//				currentNode = currentNode.leftNode;
-//			} else if (item.toString().compareTo(currentNode.item.toString()) > 0){
-//				parentNode = currentNode;
-//				currentNode = currentNode.rightNode;
-//			} else {
-//				target = currentNode;
-//				break;
-//			}
-//		}
-//		
-//		if (target != null) {
-//			if (target.leftNode == null && target.rightNode == null) {
-//				if (target.item.toString().compareTo(parentNode.item.toString()) < 0) {
-//					parentNode.leftNode = null;
-//				} else {
-//					parentNode.rightNode = null;
-//				}
-//			}
-//			
-//			else if (target.leftNode == null && target.rightNode !=null) {
-//				if (target.item.toString().equals(root.item.toString())) {
-//					root = target.rightNode;	
-//				} else {
-//					if (target.item.toString().compareTo(parentNode.item.toString()) > 0) {
-//						parentNode.rightNode = target.rightNode;
-//					} else {
-//						parentNode.leftNode = target.rightNode;
-//					}
-//				}
-//			}
-//			
-//			else if (target.rightNode == null && target.leftNode !=null) {
-//				if (target.item.toString().equals(root.item.toString())) {
-//					root = target.leftNode;
-//				} else {
-//					if (target.item.toString().compareTo(parentNode.item.toString()) > 0) {
-//						parentNode.rightNode = target.leftNode;
-//					} else {
-//						parentNode.leftNode = target.leftNode;
-//					}
-//				}
-//			}
-//			
-//			else {
-//				Node <T> smallestNode = target.rightNode;
-//				Node <T> nextNode = null;
-//				Node <T> recordNode = null;
-//				while (smallestNode.leftNode != null) {
-//					nextNode = smallestNode;
-//					smallestNode = smallestNode.leftNode;
-//					recordNode = smallestNode;
-//				}
-//				if (target.item.toString().compareTo(parentNode.item.toString()) > 0) {
-//					parentNode.rightNode = smallestNode;
-//				} else {
-//					parentNode.leftNode = smallestNode;	
-//				}
-//				
-//				smallestNode.leftNode = target.leftNode;
-//				smallestNode.rightNode = target.rightNode;
-//				
-//				if (smallestNode.rightNode == smallestNode) {
-//					smallestNode.rightNode = recordNode.rightNode;
-//				} else {
-//					nextNode.leftNode = null;
-//				}
-				
-//			}
-//		}
+			root = deleteNode(root, item);
 		// Implement me!
 	} // end of removeAll()
 
@@ -230,3 +155,4 @@ public class BstMultiset<T> extends Multiset<T>
 	}
 
 } // end of class BstMultiset
+
